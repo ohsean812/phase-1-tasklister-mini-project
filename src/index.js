@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const li = document.createElement("li")
         li.innerText = taskText
+        li.setAttribute("id", "textContainer")
 
         const editButton = document.createElement("button")
+        editButton.setAttribute("id", "editButton")
         editButton.innerText = "Edit"
         li.appendChild(editButton)
 
@@ -25,15 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const taskList = document.getElementById("tasks")
         taskList.appendChild(li)
 
-        // editButton.addEventListener("click", function(event) {
-        //     console.log(event.target.parentNode)
-        // })
+        const grabEditButton = document.getElementById("editButton")
+        grabEditButton.addEventListener("click", function() {
+            const textContainer = document.getElementById("textContainer")
+            const currentText = textContainer.innerHTML;
 
-        const editTask=e=>{
-            const newTask=prompt("Edit task:")
-            const dateDue=document.querySelector("#date-due").value
-            e.target.textContent=`${newTask} due ${dateDue}`
-          }
+            const inputElement = document.createElement("input")
+            inputElement.type = "text"
+            inputElement.value = currentText
+
+            textContainer.innerHTML = "";
+            textContainer.appendChild(inputElement)
+        })
+
 
         form.reset()
         
